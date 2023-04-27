@@ -1,5 +1,6 @@
 package com.musicappmarcos.musicappmarcos.model;
 
+import jakarta.persistence.Entity;
 import lombok.*;
 
 import java.util.Date;
@@ -7,6 +8,7 @@ import java.util.Date;
 @Data
 @RequiredArgsConstructor
 @EqualsAndHashCode(of = {"id"})
+@Entity
 public class UserDTO {
     private Integer id;
     @NonNull

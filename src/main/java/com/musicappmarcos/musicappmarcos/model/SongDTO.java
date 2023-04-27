@@ -1,10 +1,13 @@
 package com.musicappmarcos.musicappmarcos.model;
 
+import jakarta.persistence.Entity;
 import lombok.*;
+
 
 @Data
 @RequiredArgsConstructor
 @EqualsAndHashCode(of = {"name", "autor"})
+@Entity
 public class SongDTO {
     private Integer id;
     @NonNull
