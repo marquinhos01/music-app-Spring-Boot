@@ -1,4 +1,4 @@
-package model;
+package com.musicappmarcos.musicappmarcos.model;
 
 import lombok.*;
 
