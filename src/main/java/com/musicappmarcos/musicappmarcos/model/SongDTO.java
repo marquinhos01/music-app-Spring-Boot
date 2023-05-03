@@ -1,6 +1,6 @@
 package com.musicappmarcos.musicappmarcos.model;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.*;
 
 
@@ -8,7 +8,10 @@ import lombok.*;
 @RequiredArgsConstructor
 @EqualsAndHashCode(of = {"name", "autor"})
 @Entity
+@Table(name = "Cancion")
 public class SongDTO {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @NonNull
     private String name;
