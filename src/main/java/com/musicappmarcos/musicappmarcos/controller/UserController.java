@@ -8,6 +8,7 @@ import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -68,10 +69,48 @@ public class UserController {
     public ResponseEntity<?> getAllUserDTO() {
         Map<Object, Object> mensaje = new HashMap<>();
         List<UserDTO> usuarios = userService.obtenerUsuarios();
-        if (usuarios.size()==0){
+        if (usuarios.size() == 0) {
             mensaje.put("No existen usuarios en la base de datos", usuarios);
             return ResponseEntity.ok(mensaje);
         }
         return ResponseEntity.ok(usuarios);
+    }
+
+    @GetMapping(path = "/less/{age}")
+    public ResponseEntity<?> usersAgeLessThan(@PathVariable Integer age) {
+        Map<Object, Object> mensaje = new HashMap<>();
+        List<UserDTO> usuarios = userService.obtenerUsuariosMenoresDe(age);
+        if (usuarios.size() == 0) {
+            mensaje.put("No existen usuarios menores a: ", age);
+            return ResponseEntity.ok(mensaje);
+        }
+        return ResponseEntity.ok(usuarios);
+    }
+
+    @GetMapping(path = "/name/{name}")
+    public ResponseEntity<?> usersNameEquals(@PathVariable String name) {
+        Map<Object, Object> mensaje = new HashMap<>();
+        List<UserDTO> usuarios = userService.obtenerUsuariosPorNombre(name);
+        if (usuarios.size() == 0) {
+            mensaje.put("No existen usuarios con nombre: ", name);
+            return ResponseEntity.ok(mensaje);
+        }
+        return ResponseEntity.ok(usuarios);
+    }
+
+    @DeleteMapping(path = "/dni/{dni}")
+    @Transactional
+    public ResponseEntity<?> deleteByDni(@PathVariable String dni) {
+        Map<Object, Object> mensaje = new HashMap<>();
+        try {
+            userService.borrarUsuarioConDNI(dni);
+            return ResponseEntity.ok("Borrado");
+
+        } catch (Exception e) {
+            mensaje.put("No existe el usuario para borrarlo; DNI: ", dni);
+            return ResponseEntity.ok(mensaje);
+        }
+
+
     }
 }

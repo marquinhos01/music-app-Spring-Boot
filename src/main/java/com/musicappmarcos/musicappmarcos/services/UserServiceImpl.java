@@ -32,4 +32,9 @@ public class UserServiceImpl implements UserService {
     public UserDTO guardarUsuario(UserDTO userDTO) {
         return userRepository.save(userDTO);
     }
+
+
+    public void  borrarUsuarioConDNI(String dni) {
+         userRepository.deleteByDni(dni);
+    }
 }

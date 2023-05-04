@@ -18,4 +18,6 @@ public interface UserService {
 
     public UserDTO guardarUsuario(UserDTO userDTO);
 
+    public void borrarUsuarioConDNI(String dni);
+
 }

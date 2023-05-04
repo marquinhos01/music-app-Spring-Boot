@@ -16,5 +16,8 @@ public interface UserRepository extends JpaRepository<UserDTO, Integer> {
     public List<UserDTO> findByAgeLessThan(Integer age);
     public List<UserDTO> findByName(String name);
 
+    public void deleteByDni(String dni);
+
+
 
 }
